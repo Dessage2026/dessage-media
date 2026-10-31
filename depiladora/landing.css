@@ -17,7 +17,7 @@ h3{font-size:18px;font-weight:700}
 p{margin:0 0 12px}
 .topbar{background:var(--cafe);color:var(--crema-claro);font-size:13px;font-weight:600;text-align:center;padding:8px 12px;letter-spacing:.2px}
 .topbar span{white-space:nowrap}
-header.brand{background:var(--rosa-claro);border-bottom:1px solid var(--linea)}
+header.brand{background:#E9E0CE;border-bottom:1px solid #E3D9C8}
 header.brand .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 header.brand svg{height:40px;width:auto}
 .head-wa{font-size:13px;font-weight:600;color:var(--cafe);text-decoration:none;border:1.5px solid var(--cafe);border-radius:999px;padding:7px 14px}
