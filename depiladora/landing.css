@@ -161,3 +161,6 @@ section.bloque{padding:56px 0}
 .wa-float,.wa-float.bajo{bottom:24px;right:24px}
 footer{padding-bottom:28px}
 }
+.lead.izq{margin:0 0 16px;max-width:none;text-align:left}
+.dos .pasos{grid-template-columns:1fr}
+@media(min-width:820px){.dos .paso{flex-direction:row}.dos .beneficios{grid-template-columns:1fr 1fr}.dos .img-card{max-width:520px;width:100%;justify-self:center}}
