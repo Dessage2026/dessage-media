@@ -34,7 +34,7 @@ marcarColorForm(colorElegido,0);
 document.addEventListener('click',function(e){
 var b=e.target.closest&&e.target.closest('#oktopus-checkout button[type="button"]');
 if(!b)return;var t=(b.textContent||'').trim().toUpperCase();
-chips.forEach(function(ch){if(ch.getAttribute('data-color')===t){chips.forEach(function(x){x.classList.remove('activa')});ch.classList.add('activa');nombre.textContent=ch.getAttribute('data-nombre');colorElegido=t;}});
+chips.forEach(function(ch){if(ch.getAttribute('data-color')===t){chips.forEach(function(x){x.classList.remove('activa')});ch.classList.add('activa');nombre.textContent=ch.getAttribute('data-nombre');colorElegido=t;if(FOTOS[t]){main.src=FOTOS[t];btns.forEach(function(x){x.classList.toggle('activa',x.getAttribute('data-src')===FOTOS[t]);});}}});
 });
 var mo=new MutationObserver(ocultarAgotados);
 var cont=document.getElementById('oktopus-checkout');
