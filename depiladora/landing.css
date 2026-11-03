@@ -164,3 +164,7 @@ footer{padding-bottom:28px}
 .lead.izq{margin:0 0 16px;max-width:none;text-align:left}
 .dos .pasos{grid-template-columns:1fr}
 @media(min-width:820px){.dos .paso{flex-direction:row}.dos .beneficios{grid-template-columns:1fr 1fr}.dos .img-card{max-width:520px;width:100%;justify-self:center}}
+/* 03/11: formulario arriba */
+.compra-top{padding-top:8px}
+.compra-top h2{margin-bottom:6px}
+.compra-top .lead{margin-bottom:10px}
