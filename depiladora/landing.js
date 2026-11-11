@@ -67,6 +67,7 @@ window.addEventListener('scroll',check,{passive:true});check();
 var MSG_TEL='Revisa tu celular: debe tener 10 n\u00fameros y empezar por 3 (ej. 3001234567). As\u00ed podemos confirmar tu pedido.';
 function campoTel(){
 var c=document.getElementById('oktopus-checkout');if(!c)return null;
+var t1=c.querySelector('input[type="tel"]');if(t1)return t1;
 var ins=c.querySelectorAll('input');
 for(var i=0;i<ins.length;i++){var x=ins[i];
 var h=((x.type||'')+' '+(x.name||'')+' '+(x.id||'')+' '+(x.placeholder||'')+' '+(x.getAttribute('autocomplete')||'')+' '+(x.getAttribute('aria-label')||'')).toLowerCase();
@@ -85,6 +86,7 @@ a.textContent=MSG_TEL;inp.style.borderColor='#B00020';inp.style.boxShadow='0 0 0
 }else{if(a)a.remove();inp.style.borderColor='';inp.style.boxShadow='';}}
 function bloquearSiTelMalo(e){
 var inp=campoTel();if(!inp)return;
+if(/[a-z]/i.test(inp.value||''))return;
 if(!telValido(inp.value)){e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
 avisoTel(inp,true);try{inp.scrollIntoView({block:'center',behavior:'smooth'});inp.focus({preventScroll:true});}catch(_){}}}
 document.addEventListener('click',function(e){
