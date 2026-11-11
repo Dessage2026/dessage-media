@@ -62,4 +62,44 @@ sticky.classList.toggle('ver',!enForm);
 wa.classList.toggle('bajo',enForm);
 }
 window.addEventListener('scroll',check,{passive:true});check();
+
+/* Validacion del celular (Colombia: 10 digitos que empiezan por 3) */
+var MSG_TEL='Revisa tu celular: debe tener 10 n\u00fameros y empezar por 3 (ej. 3001234567). As\u00ed podemos confirmar tu pedido.';
+function campoTel(){
+var c=document.getElementById('oktopus-checkout');if(!c)return null;
+var ins=c.querySelectorAll('input');
+for(var i=0;i<ins.length;i++){var x=ins[i];
+var h=((x.type||'')+' '+(x.name||'')+' '+(x.id||'')+' '+(x.placeholder||'')+' '+(x.getAttribute('autocomplete')||'')+' '+(x.getAttribute('aria-label')||'')).toLowerCase();
+if(x.type==='tel'||/tel|phone|celular|whatsapp|m[o\u00f3]vil/.test(h))return x;}
+return null;}
+function telValido(v){var d=(v||'').replace(/\D/g,'');
+if(d.length===12&&d.indexOf('57')===0)d=d.slice(2);
+return d.length===10&&(d.charAt(0)==='3'||d.indexOf('60')===0);}
+function avisoTel(inp,mostrar){
+var id='dsg-aviso-tel';var a=document.getElementById(id);
+if(mostrar){
+if(!a){a=document.createElement('div');a.id=id;a.setAttribute('role','alert');
+a.style.cssText='color:#B00020;background:#FDECEA;border:1px solid #F5C2C0;border-radius:8px;padding:8px 10px;margin:6px 0 10px;font-size:14px;line-height:1.35;font-weight:600';
+inp.insertAdjacentElement('afterend',a);}
+a.textContent=MSG_TEL;inp.style.borderColor='#B00020';inp.style.boxShadow='0 0 0 2px rgba(176,0,32,.18)';
+}else{if(a)a.remove();inp.style.borderColor='';inp.style.boxShadow='';}}
+function bloquearSiTelMalo(e){
+var inp=campoTel();if(!inp)return;
+if(!telValido(inp.value)){e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+avisoTel(inp,true);try{inp.scrollIntoView({block:'center',behavior:'smooth'});inp.focus({preventScroll:true});}catch(_){}}}
+document.addEventListener('click',function(e){
+var b=e.target.closest&&e.target.closest('#oktopus-checkout button, #oktopus-checkout input[type="submit"]');
+if(!b)return;
+var t=((b.textContent||b.value||'')+'').toLowerCase();
+if(b.type==='submit'||/pedi|pedido|comprar|confirmar|finalizar|pagar|realizar|enviar/.test(t))bloquearSiTelMalo(e);
+},true);
+document.addEventListener('submit',function(e){
+if(e.target.closest&&e.target.closest('#oktopus-checkout'))bloquearSiTelMalo(e);
+},true);
+document.addEventListener('input',function(e){
+var inp=campoTel();if(inp&&e.target===inp&&document.getElementById('dsg-aviso-tel')&&telValido(inp.value))avisoTel(inp,false);
+},true);
+document.addEventListener('blur',function(e){
+var inp=campoTel();if(inp&&e.target===inp&&inp.value.replace(/\D/g,'').length>0)avisoTel(inp,!telValido(inp.value));
+},true);
 })();
